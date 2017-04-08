@@ -3,7 +3,7 @@
 
 [![NPM](https://nodei.co/npm/webworkify.png?downloads=true)](https://www.npmjs.com/package/webworkify)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-webworkify/build/screenCapture.buildNpmdoc.browser.%2Fhome%2Ftravis%2Fbuild%2Fnpmdoc%2Fnode-npmdoc-webworkify%2Ftmp%2Fbuild%2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-webworkify/build/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-webworkify/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-webworkify%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-webworkify/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-webworkify/build/screenCapture.npmPackageListing.svg)
 
