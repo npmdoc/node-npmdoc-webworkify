@@ -1,9 +1,14 @@
-# api documentation for  [webworkify (v1.4.0)](https://github.com/substack/webworkify)  [![npm package](https://img.shields.io/npm/v/npmdoc-webworkify.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-webworkify) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-webworkify.svg)](https://travis-ci.org/npmdoc/node-npmdoc-webworkify)
+# npmdoc-webworkify
+
+#### api documentation for  [webworkify (v1.4.0)](https://github.com/substack/webworkify)  [![npm package](https://img.shields.io/npm/v/npmdoc-webworkify.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-webworkify) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-webworkify.svg)](https://travis-ci.org/npmdoc/node-npmdoc-webworkify)
+
 #### launch a web worker that can require() in the browser with browserify
 
-[![NPM](https://nodei.co/npm/webworkify.png?downloads=true)](https://www.npmjs.com/package/webworkify)
+[![NPM](https://nodei.co/npm/webworkify.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/webworkify)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-webworkify/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-webworkify%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-webworkify/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-webworkify/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-webworkify/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-webworkify/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-webworkify/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-webworkify/build/screenCapture.npmPackageListing.svg)
 
@@ -16,26 +21,22 @@
 ```json
 
 {
-    "author": {
-        "name": "James Halliday",
-        "email": "mail@substack.net",
-        "url": "http://substack.net"
-    },
-    "bugs": {
-        "url": "https://github.com/substack/webworkify/issues"
-    },
-    "dependencies": {},
+    "name": "webworkify",
+    "version": "1.4.0",
     "description": "launch a web worker that can require() in the browser with browserify",
+    "main": "index.js",
+    "dependencies": {},
     "devDependencies": {
         "gamma": "~0.1.0",
         "tape": "~1.0.4"
     },
-    "directories": {},
-    "dist": {
-        "shasum": "71245d1e34cacf54e426bd955f8cc6ee12d024c2",
-        "tarball": "https://registry.npmjs.org/webworkify/-/webworkify-1.4.0.tgz"
+    "scripts": {
+        "test": "tape test/*.js"
     },
-    "gitHead": "ed584efa99a2ecaf23905b7926e0575e7c7a4761",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/substack/webworkify.git"
+    },
     "homepage": "https://github.com/substack/webworkify",
     "keywords": [
         "web",
@@ -44,41 +45,13 @@
         "browser",
         "fork"
     ],
-    "license": "MIT",
-    "main": "index.js",
-    "maintainers": [
-        {
-            "name": "anandthakker",
-            "email": "vestibule@anandthakker.net"
-        },
-        {
-            "name": "substack",
-            "email": "substack@gmail.com"
-        }
-    ],
-    "name": "webworkify",
-    "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/substack/webworkify.git"
+    "author": {
+        "name": "James Halliday",
+        "url": "http://substack.net"
     },
-    "scripts": {
-        "test": "tape test/*.js"
-    },
-    "version": "1.4.0"
+    "license": "MIT"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module webworkify](#apidoc.module.webworkify)
-
-
-
-# <a name="apidoc.module.webworkify"></a>[module webworkify](#apidoc.module.webworkify)
 
 
 
