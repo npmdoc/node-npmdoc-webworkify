@@ -61,12 +61,108 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.webworkify">module webworkify</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.webworkify.webworkify">
+            function <span class="apidocSignatureSpan"></span>webworkify
+            <span class="apidocSignatureSpan">(fn, options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.webworkify" id="apidoc.module.webworkify">module webworkify</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.webworkify.webworkify" id="apidoc.element.webworkify.webworkify">
+        function <span class="apidocSignatureSpan"></span>webworkify
+        <span class="apidocSignatureSpan">(fn, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">webworkify = function (fn, options) {
+    var wkey;
+    var cacheKeys = Object.keys(cache);
+
+    for (var i = 0, l = cacheKeys.length; i &#x3c; l; i++) {
+        var key = cacheKeys[i];
+        var exp = cache[key].exports;
+        // Using babel as a transpiler to use esmodule, the export will always
+        // be an object with the default export as a property of it. To ensure
+        // the existing api and babel esmodule exports are both supported we
+        // check for both
+        if (exp === fn || exp &#x26;&#x26; exp.default === fn) {
+            wkey = key;
+            break;
+        }
+    }
+
+    if (!wkey) {
+        wkey = Math.floor(Math.pow(16, 8) * Math.random()).toString(16);
+        var wcache = {};
+        for (var i = 0, l = cacheKeys.length; i &#x3c; l; i++) {
+            var key = cacheKeys[i];
+            wcache[key] = key;
+        }
+        sources[wkey] = [
+            Function([&#x27;require&#x27;,&#x27;module&#x27;,&#x27;exports&#x27;], &#x27;(&#x27; + fn + &#x27;)(self)&#x27;),
+            wcache
+        ];
+    }
+    var skey = Math.floor(Math.pow(16, 8) * Math.random()).toString(16);
+
+    var scache = {}; scache[wkey] = wkey;
+    sources[skey] = [
+        Function([&#x27;require&#x27;], (
+            // try to call default if defined to also support babel esmodule
+            // exports
+            &#x27;var f = require(&#x27; + stringify(wkey) + &#x27;);&#x27; +
+            &#x27;(f.default ? f.default : f)(self);&#x27;
+        )),
+        scache
+    ];
+
+    var workerSources = {};
+    resolveSources(skey);
+
+    function resolveSources(key) {
+        workerSources[key] = true;
+
+        for (var depPath in sources[key][1]) {
+            var depKey = sources[key][1][depPath];
+            if (!workerSources[depKey]) {
+                resolveSources(depKey);
+            }
+        }
+    }
+
+    var src = &#x27;(&#x27; + bundleFn + &#x27;)({&#x27;
+        + Object.keys(workerSources).map(function (key) {
+            return stringify(key) + &#x27;:[&#x27;
+                + sources[key][0]
+                + &#x27;,&#x27; + stringify(sources[key][1]) + &#x27;]&#x27;
+            ;
+        }).join(&#x27;,&#x27;)
+        + &#x27;},{},[&#x27; + stringify(skey) + &#x27;])&#x27;
+    ;
+
+    var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+
+    var blob = new Blob([src], { type: &#x27;text/javascript&#x27; });
+    if (options &#x26;&#x26; options.bare) { return blob; }
+    var workerUrl = URL.createObjectURL(blob);
+    var worker = new Worker(workerUrl);
+    worker.objectURL = workerUrl;
+    return worker;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 

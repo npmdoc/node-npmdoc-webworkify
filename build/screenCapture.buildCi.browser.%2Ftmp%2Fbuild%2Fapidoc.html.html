@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/substack/webworkify"
-
-    >webworkify (v1.4.0)</a>
+    <a href="https://github.com/substack/webworkify">webworkify (v1.4.0)</a>
 </h1>
 <h4>launch a web worker that can require() in the browser with browserify</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.webworkify">module webworkify</a><ol>
 
@@ -89,14 +82,14 @@
     var wkey;
     var cacheKeys = Object.keys(cache);
 
-    for (var i = 0, l = cacheKeys.length; i &#x3c; l; i++) {
+    for (var i = 0, l = cacheKeys.length; i &lt; l; i++) {
         var key = cacheKeys[i];
         var exp = cache[key].exports;
         // Using babel as a transpiler to use esmodule, the export will always
         // be an object with the default export as a property of it. To ensure
         // the existing api and babel esmodule exports are both supported we
         // check for both
-        if (exp === fn || exp &#x26;&#x26; exp.default === fn) {
+        if (exp === fn || exp &amp;&amp; exp.default === fn) {
             wkey = key;
             break;
         }
@@ -105,12 +98,12 @@
     if (!wkey) {
         wkey = Math.floor(Math.pow(16, 8) * Math.random()).toString(16);
         var wcache = {};
-        for (var i = 0, l = cacheKeys.length; i &#x3c; l; i++) {
+        for (var i = 0, l = cacheKeys.length; i &lt; l; i++) {
             var key = cacheKeys[i];
             wcache[key] = key;
         }
         sources[wkey] = [
-            Function([&#x27;require&#x27;,&#x27;module&#x27;,&#x27;exports&#x27;], &#x27;(&#x27; + fn + &#x27;)(self)&#x27;),
+            Function(['require','module','exports'], '(' + fn + ')(self)'),
             wcache
         ];
     }
@@ -118,11 +111,11 @@
 
     var scache = {}; scache[wkey] = wkey;
     sources[skey] = [
-        Function([&#x27;require&#x27;], (
+        Function(['require'], (
             // try to call default if defined to also support babel esmodule
             // exports
-            &#x27;var f = require(&#x27; + stringify(wkey) + &#x27;);&#x27; +
-            &#x27;(f.default ? f.default : f)(self);&#x27;
+            'var f = require(' + stringify(wkey) + ');' +
+            '(f.default ? f.default : f)(self);'
         )),
         scache
     ];
@@ -141,20 +134,20 @@
         }
     }
 
-    var src = &#x27;(&#x27; + bundleFn + &#x27;)({&#x27;
+    var src = '(' + bundleFn + ')({'
         + Object.keys(workerSources).map(function (key) {
-            return stringify(key) + &#x27;:[&#x27;
+            return stringify(key) + ':['
                 + sources[key][0]
-                + &#x27;,&#x27; + stringify(sources[key][1]) + &#x27;]&#x27;
+                + ',' + stringify(sources[key][1]) + ']'
             ;
-        }).join(&#x27;,&#x27;)
-        + &#x27;},{},[&#x27; + stringify(skey) + &#x27;])&#x27;
+        }).join(',')
+        + '},{},[' + stringify(skey) + '])'
     ;
 
     var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
-    var blob = new Blob([src], { type: &#x27;text/javascript&#x27; });
-    if (options &#x26;&#x26; options.bare) { return blob; }
+    var blob = new Blob([src], { type: 'text/javascript' });
+    if (options &amp;&amp; options.bare) { return blob; }
     var workerUrl = URL.createObjectURL(blob);
     var worker = new Worker(workerUrl);
     worker.objectURL = workerUrl;
@@ -172,3 +165,4 @@
     ]
 </div>
 </div>
+</body></html>
